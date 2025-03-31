@@ -1,59 +1,49 @@
-# ContactManagerApp
+# Contact Manager App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.5.
+Contact Manager App is a powerful tool designed to help you manage your contacts efficiently. With features like adding, editing, and deleting contacts, this app provides a seamless experience for organizing your personal or professional network.
 
-## Development server
+## Features
+- Add new contacts with details like name, email, phone, and photo.
+- Edit existing contacts to update their information.
+- Delete contacts with a confirmation modal to prevent accidental deletions.
+- View contact details with a user-friendly interface.
 
-To start a local development server, run:
+## Installation
+To install and run the app locally, follow these steps:
 
-```bash
-ng serve
-```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/pinsdev24/contact-manager.git
+   ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+2. Navigate to the project directory:
+   ```bash
+   cd contact-manager
+   ```
 
-## Code scaffolding
+3. Install the dependencies:
+   ```bash
+   npm install
+   ```
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+4. Start the development server:
+   ```bash
+   npm run start
+   ```
 
-```bash
-ng generate component component-name
-```
+5. Open your browser and go to `http://localhost:4200/` to view the app.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Usage
+- Navigate to the Contacts page to view all contacts.
+- Click on a contact to view detailed information.
+- Use the Edit button to modify contact details.
+- Click the Delete button to remove a contact, with a confirmation prompt.
 
-```bash
-ng generate --help
-```
+## API Documentation
+For detailed API documentation, please refer to the [API Docs](https://api-docs-url.com).
 
-## Building
+## Contributing
+We welcome contributions to enhance the app's functionality. Please fork the repository and submit a pull request.
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## License
+This project is licensed under the MIT License.
