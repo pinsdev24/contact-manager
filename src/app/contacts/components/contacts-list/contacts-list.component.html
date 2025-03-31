@@ -1,0 +1,118 @@
+<div class="contacts-list-container" (click)="closeAllDropdowns()">
+  <div class="search-bar">
+    <div class="search-input-wrapper">
+      <i class="search-icon">🔍</i>
+      <input 
+        type="text" 
+        [(ngModel)]="searchTerm" 
+        placeholder="Search contacts..." 
+        (keyup.enter)="onSearch()"
+        class="search-input"
+      />
+      <button *ngIf="searchTerm" class="clear-search" (click)="clearSearch()">&times;</button>
+    </div>
+    <button class="search-button" (click)="onSearch()">Search</button>
+    <button class="add-button" (click)="openCreateModal()">Add Contact</button>
+  </div>
+
+  <div *ngIf="isLoading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading contacts...</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage && contacts.length === 0" class="no-contacts">
+    <div class="empty-state">
+      <div class="empty-icon">📇</div>
+      <p>No contacts found. Try a different search or add a new contact.</p>
+      <button class="add-button-empty" (click)="openCreateModal()">Add Contact</button>
+    </div>
+  </div>
+
+  <div *ngIf="contacts.length > 0" class="contacts-grid">
+    <div *ngFor="let contact of contacts" class="contact-card">
+      <div class="card-header">
+        <div class="contact-avatar" (click)="viewContactDetails(contact.id)">
+          <img *ngIf="contact.photo" [src]="contact.photo" alt="{{ contact.first_name }} {{ contact.last_name }}">
+          <div *ngIf="!contact.photo" class="avatar-initials">
+            <span *ngIf="contact.first_name && contact.last_name">{{ contact.first_name.charAt(0) }}{{ contact.last_name.charAt(0) }}</span>
+            <span *ngIf="!contact.first_name && !contact.last_name">{{ 'AM' }}</span>
+          </div>
+        </div>
+        <div class="card-menu">
+          <button class="menu-button" (click)="toggleDropdown(contact.id, $event)">
+            <span class="dots">⋮</span>
+          </button>
+          <div class="dropdown-menu" [class.show]="activeDropdown === contact.id">
+            <button class="dropdown-item" [routerLink]="['/contacts', contact.id, 'edit']">
+              <span class="item-icon">✏️</span> Edit
+            </button>
+            <button class="dropdown-item" (click)="openDeleteModal(contact, $event)">
+              <span class="item-icon">🗑️</span> Delete
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="contact-info" (click)="viewContactDetails(contact.id)">
+        <h3 class="contact-name">{{ contact.first_name }} {{ contact.last_name }}</h3>
+        <hr class="solid">
+        <div class="contact-details">
+          <div class="detail-item">
+            <span class="detail-icon">✉️</span>
+            <span class="detail-text">{{ contact.email }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">📱</span>
+            <span class="detail-text">{{ contact.phone }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pagination" *ngIf="getTotalPages() > 1">
+    <button 
+      [disabled]="currentPage === 1" 
+      (click)="onPageChange(currentPage - 1)" 
+      class="pagination-button"
+    >
+      Previous
+    </button>
+    
+    <span *ngFor="let page of getPageNumbers()" class="page-number">
+      <button 
+        [class.active]="currentPage === page" 
+        (click)="onPageChange(page)" 
+        class="pagination-button"
+      >
+        {{ page }}
+      </button>
+    </span>
+    
+    <button 
+      [disabled]="currentPage === getTotalPages()" 
+      (click)="onPageChange(currentPage + 1)" 
+      class="pagination-button"
+    >
+      Next
+    </button>
+  </div>
+</div>
+
+<!-- Contact Modal -->
+<app-contact-modal 
+  [isOpen]="isModalOpen" 
+  [contact]="selectedContact"
+  (close)="closeModal()"
+  (saved)="onContactSaved()"
+></app-contact-modal>
+
+<app-delete-confirmation-modal
+  [isOpen]="isDeleteModalOpen"
+  [contact]="contactToDelete"
+  (close)="closeDeleteModal()"
+  (confirm)="confirmDeleteContact()"
+></app-delete-confirmation-modal>

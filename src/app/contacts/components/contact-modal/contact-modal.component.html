@@ -1,0 +1,94 @@
+<div class="modal-overlay" *ngIf="isOpen" (click)="closeModal()"></div>
+
+<div class="modal-container" *ngIf="isOpen">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>{{ modalTitle }}</h2>
+      <button class="close-button" (click)="closeModal()">&times;</button>
+    </div>
+
+    <div class="modal-body">
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <div class="form-group half-width">
+            <label for="first_name">First Name</label>
+            <input 
+              type="text" 
+              id="first_name" 
+              formControlName="first_name" 
+              placeholder="Enter first name"
+              [class.invalid]="isFieldInvalid('first_name')"
+            >
+            <div class="error-message" *ngIf="isFieldInvalid('first_name')">
+              First name is required
+            </div>
+          </div>
+
+          <div class="form-group half-width">
+            <label for="last_name">Last Name</label>
+            <input 
+              type="text" 
+              id="last_name" 
+              formControlName="last_name" 
+              placeholder="Enter last name"
+              [class.invalid]="isFieldInvalid('last_name')"
+            >
+            <div class="error-message" *ngIf="isFieldInvalid('last_name')">
+              Last name is required
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input 
+            type="email" 
+            id="email" 
+            formControlName="email" 
+            placeholder="Enter email address"
+            [class.invalid]="isFieldInvalid('email')"
+          >
+          <div class="error-message" *ngIf="isFieldInvalid('email')">
+            Please enter a valid email address
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input 
+            type="tel" 
+            id="phone" 
+            formControlName="phone" 
+            placeholder="Enter phone number"
+            [class.invalid]="isFieldInvalid('phone')"
+          >
+          <div class="error-message" *ngIf="isFieldInvalid('phone')">
+            Phone number is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="photo">Photo URL (optional)</label>
+          <input 
+            type="text" 
+            id="photo" 
+            formControlName="photo" 
+            placeholder="Enter photo URL"
+          >
+        </div>
+
+        <div class="error-message" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="cancel-button" (click)="closeModal()">Cancel</button>
+          <button type="submit" class="save-button" [disabled]="isSubmitting">
+            <span *ngIf="isSubmitting">Saving...</span>
+            <span *ngIf="!isSubmitting">Save</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
