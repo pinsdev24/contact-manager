@@ -20,14 +20,20 @@ export class ContactsService {
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  getContacts(page: number = 1, search: string = ''): Observable<ContactsResponse> {
-    let params = new HttpParams().set('page', page.toString());
+  getContacts(page: number = 0, search: string = ''): Observable<ContactsResponse> {
+    let params = new HttpParams();
+
+    if (page) {
+      params = params.set('page', page.toString());
+    }
     
     if (search) {
-      params = params.set('search', search);
+      params = params.append('search', search);
     }
 
-    return this.http.get<ContactsResponse>(`${this.API_URL}/contacts`)
+    console.log('Params:', params.keys());
+
+    return this.http.get<ContactsResponse>(`${this.API_URL}/contacts`, { params })
       .pipe(
         catchError(error => this.handleError(error))
       );

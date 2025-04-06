@@ -1,89 +1,173 @@
-<div class="edit-page-container">
-  <div class="edit-card">
-    <div class="edit-header">
-      <h1>Edit Contact</h1>
+<div class="min-h-screen bg-background p-4 md:p-6">
+  <div class="container mx-auto max-w-3xl">
+    <div class="mb-6">
+      <a (click)="goBack()" class="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors group cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform group-hover:-translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+        </svg>
+        Back
+      </a>
     </div>
 
-    <div class="edit-content">
-      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="first_name">First Name</label>
-          <input 
-            type="text" 
-            id="first_name" 
-            formControlName="first_name" 
-            placeholder="Enter first name"
-            [class.invalid]="isFieldInvalid('first_name')"
-          >
-          <div class="error-message" *ngIf="isFieldInvalid('first_name')">
-            First name is required
+    <div class="bg-white/95 backdrop-filter backdrop-blur-sm rounded-custom shadow-custom overflow-hidden border border-gray-100 relative">
+      <!-- Decorative header accent -->
+      <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary/20 to-transparent"></div>
+      
+      <!-- Header -->
+      <div class="p-5 flex items-center border-b border-gray-100 relative">
+        <span class="bg-primary/10 p-2 rounded-full mr-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+          </svg>
+        </span>
+        <h1 class="text-xl font-semibold text-gray-800">Edit Contact</h1>
+      </div>
+
+      <!-- Form content -->
+      <div class="p-5">
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="space-y-2">
+              <label for="first_name" class="block text-sm font-medium text-gray-700">First Name</label>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <input 
+                  type="text" 
+                  id="first_name" 
+                  formControlName="first_name" 
+                  placeholder="Enter first name"
+                  class="w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-white transition-colors"
+                  [class.border-red-500]="isFieldInvalid('first_name')"
+                >
+              </div>
+              <div class="text-red-500 text-xs" *ngIf="isFieldInvalid('first_name')">
+                First name is required
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <label for="last_name" class="block text-sm font-medium text-gray-700">Last Name</label>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <input 
+                  type="text" 
+                  id="last_name" 
+                  formControlName="last_name" 
+                  placeholder="Enter last name"
+                  class="w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-white transition-colors"
+                  [class.border-red-500]="isFieldInvalid('last_name')"
+                >
+              </div>
+              <div class="text-red-500 text-xs" *ngIf="isFieldInvalid('last_name')">
+                Last name is required
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <label for="last_name">Last Name</label>
-          <input 
-            type="text" 
-            id="last_name" 
-            formControlName="last_name" 
-            placeholder="Enter last name"
-            [class.invalid]="isFieldInvalid('last_name')"
-          >
-          <div class="error-message" *ngIf="isFieldInvalid('last_name')">
-            Last name is required
+          <div class="space-y-2 mb-5">
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                </svg>
+              </div>
+              <input 
+                type="email" 
+                id="email" 
+                formControlName="email" 
+                placeholder="Enter email address"
+                class="w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-white transition-colors"
+                [class.border-red-500]="isFieldInvalid('email')"
+              >
+            </div>
+            <div class="text-red-500 text-xs" *ngIf="isFieldInvalid('email')">
+              Please enter a valid email address
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input 
-            type="email" 
-            id="email" 
-            formControlName="email" 
-            placeholder="Enter email address"
-            [class.invalid]="isFieldInvalid('email')"
-          >
-          <div class="error-message" *ngIf="isFieldInvalid('email')">
-            Please enter a valid email address
+          <div class="space-y-2 mb-5">
+            <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                </svg>
+              </div>
+              <input 
+                type="tel" 
+                id="phone" 
+                formControlName="phone" 
+                placeholder="Enter phone number"
+                class="w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-white transition-colors"
+                [class.border-red-500]="isFieldInvalid('phone')"
+              >
+            </div>
+            <div class="text-red-500 text-xs" *ngIf="isFieldInvalid('phone')">
+              Phone number is required
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <label for="phone">Phone</label>
-          <input 
-            type="tel" 
-            id="phone" 
-            formControlName="phone" 
-            placeholder="Enter phone number"
-            [class.invalid]="isFieldInvalid('phone')"
-          >
-          <div class="error-message" *ngIf="isFieldInvalid('phone')">
-            Phone number is required
+          <div class="space-y-2 mb-5">
+            <label for="photo" class="block text-sm font-medium text-gray-700">Photo URL (optional)</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <input 
+                type="text" 
+                id="photo" 
+                formControlName="photo" 
+                placeholder="Enter photo URL"
+                class="w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-white transition-colors"
+              >
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <label for="photo">Photo URL (optional)</label>
-          <input 
-            type="text" 
-            id="photo" 
-            formControlName="photo" 
-            placeholder="Enter photo URL"
-          >
-        </div>
+          <div class="text-red-500 text-sm mb-5 bg-red-50 p-3 rounded-lg" *ngIf="errorMessage">
+            <div class="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+              </svg>
+              {{ errorMessage }}
+            </div>
+          </div>
 
-        <div class="error-message" *ngIf="errorMessage">
-          {{ errorMessage }}
-        </div>
-
-        <div class="form-actions">
-          <button type="button" class="cancel-button" (click)="onCancel()">Cancel</button>
-          <button type="submit" class="save-button" [disabled]="isSubmitting">
-            <span *ngIf="isSubmitting">Saving...</span>
-            <span *ngIf="!isSubmitting">Save Changes</span>
-          </button>
-        </div>
-      </form>
+          <div class="flex justify-end gap-3 border-t border-gray-100 pt-5">
+            <button 
+              type="button" 
+              class="px-4 py-2 rounded-custom border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 transition-colors shadow-sm flex items-center gap-2" 
+              (click)="onCancel()">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+              Cancel
+            </button>
+            <button 
+              type="submit" 
+              class="px-4 py-2 rounded-custom bg-primary text-white hover:bg-primary/90 transition-colors shadow-custom flex items-center gap-2 disabled:opacity-70" 
+              [disabled]="isSubmitting">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" *ngIf="!isSubmitting">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <div class="w-5 h-5 rounded-full border-2 border-white border-t-transparent animate-spin" *ngIf="isSubmitting"></div>
+              <span *ngIf="isSubmitting">Saving...</span>
+              <span *ngIf="!isSubmitting">Save Changes</span>
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>

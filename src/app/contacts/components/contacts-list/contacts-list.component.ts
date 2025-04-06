@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -6,6 +6,8 @@ import { ContactsService } from '../../services/contacts.service';
 import { Contact } from '../../models/contact.model';
 import { ContactModalComponent } from '../contact-modal/contact-modal.component';
 import { DeleteConfirmationModalComponent } from '../delete-confirmation-modal/delete-confirmation-modal.component';
+import { Subject } from 'rxjs';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-contacts-list',
@@ -14,9 +16,9 @@ import { DeleteConfirmationModalComponent } from '../delete-confirmation-modal/d
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule, ContactModalComponent, DeleteConfirmationModalComponent]
 })
-export class ContactsListComponent implements OnInit {
+export class ContactsListComponent implements OnInit, OnDestroy {
   contacts: Contact[] = [];
-  currentPage = 1;
+  currentPage = 0;
   pageSize = 10;
   totalContacts = 0;
   searchTerm = '';
@@ -34,6 +36,13 @@ export class ContactsListComponent implements OnInit {
   // Dropdown menu properties
   activeDropdown: number | null = null;
 
+  // Make Math available in the template
+  Math = Math;
+
+  // Debouncing search
+  private searchSubject = new Subject<string>();
+  private destroy$ = new Subject<void>();
+
   constructor(
     private contactsService: ContactsService,
     private router: Router
@@ -41,6 +50,19 @@ export class ContactsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadContacts();
+    
+    // Setup search debounce
+    this.searchSubject.pipe(
+      debounceTime(300), // Wait 300ms after the last input event
+      takeUntil(this.destroy$)
+    ).subscribe(() => {
+      this.onSearch();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   loadContacts(): void {
@@ -50,7 +72,6 @@ export class ContactsListComponent implements OnInit {
     this.contactsService.getContacts(this.currentPage, this.searchTerm).subscribe({
       next: (response) => {
         this.contacts = response.data;
-        console.log('Contacts:', this.contacts);
         this.totalContacts = response.pagination.total;
         this.pageSize = response.pagination.pageSize;
         this.isLoading = false;
@@ -62,14 +83,24 @@ export class ContactsListComponent implements OnInit {
     });
   }
 
+  onSearchInput(): void {
+    this.searchSubject.next(this.searchTerm);
+  }
+
   onSearch(): void {
-    this.currentPage = 1; // Reset to first page when searching
+    this.currentPage = 0; // Reset to first page (zero-indexed) when searching
     this.loadContacts();
   }
 
   onPageChange(page: number): void {
-    this.currentPage = page;
+    // Convert from 1-indexed UI page to 0-indexed API page
+    this.currentPage = page - 1;
     this.loadContacts();
+  }
+
+  // Display page for UI (1-indexed)
+  getDisplayPage(): number {
+    return this.currentPage + 1;
   }
 
   getTotalPages(): number {
@@ -78,7 +109,37 @@ export class ContactsListComponent implements OnInit {
 
   getPageNumbers(): number[] {
     const totalPages = this.getTotalPages();
-    return Array.from({ length: totalPages }, (_, i) => i + 1);
+    const displayPage = this.getDisplayPage(); // Use 1-indexed page for UI
+    
+    // If we have 7 or fewer pages, show all pages
+    if (totalPages <= 7) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+    
+    // Otherwise, show a limited number of pages with ellipsis
+    let pages: number[] = [];
+    
+    // Always include first and last page
+    pages.push(1);
+    
+    // Current page is close to the beginning
+    if (displayPage <= 3) {
+      pages.push(2, 3, 4, -1, totalPages);
+    } 
+    // Current page is close to the end
+    else if (displayPage >= totalPages - 2) {
+      pages.push(-1, totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+    } 
+    // Current page is in the middle
+    else {
+      pages.push(-1, displayPage - 1, displayPage, displayPage + 1, -1, totalPages);
+    }
+    
+    return pages;
+  }
+
+  isEllipsis(value: number): boolean {
+    return value === -1;
   }
 
   openDeleteModal(contact: Contact, event: Event): void {

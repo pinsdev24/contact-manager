@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Contact } from '../../models/contact.model';
 import { ContactsService } from '../../services/contacts.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-contact-edit',
   templateUrl: './contact-edit.component.html',
   styleUrls: ['./contact-edit.component.css'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule]
+  imports: [CommonModule, ReactiveFormsModule, RouterModule]
 })
 export class ContactEditComponent implements OnInit {
   contactForm!: FormGroup;
@@ -22,7 +23,8 @@ export class ContactEditComponent implements OnInit {
     private fb: FormBuilder,
     private contactsService: ContactsService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -87,6 +89,10 @@ export class ContactEditComponent implements OnInit {
   }
 
   onCancel(): void {
-    this.router.navigate(['/contacts']);
+    this.goBack();
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }
