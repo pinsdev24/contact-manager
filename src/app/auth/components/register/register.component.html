@@ -1,103 +1,176 @@
-<div class="auth-container">
-  <div class="auth-card">
-    <h2>Register</h2>
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="first_name">First Name</label>
-        <input 
-          type="text" 
-          id="first_name" 
-          formControlName="first_name" 
-          placeholder="Enter your first name"
-          [ngClass]="{'invalid': registerForm.get('first_name')?.invalid && registerForm.get('first_name')?.touched}"
-        >
-        <div class="error-message" *ngIf="registerForm.get('first_name')?.invalid && registerForm.get('first_name')?.touched">
-          <span *ngIf="registerForm.get('first_name')?.errors?.['required']">First name is required</span>
-          <span *ngIf="registerForm.get('first_name')?.errors?.['minlength']">First name must be at least 2 characters</span>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="last_name">Last Name</label>
-        <input 
-          type="text" 
-          id="last_name" 
-          formControlName="last_name" 
-          placeholder="Enter your last name"
-          [ngClass]="{'invalid': registerForm.get('last_name')?.invalid && registerForm.get('last_name')?.touched}"
-        >
-        <div class="error-message" *ngIf="registerForm.get('last_name')?.invalid && registerForm.get('last_name')?.touched">
-          <span *ngIf="registerForm.get('last_name')?.errors?.['required']">Last name is required</span>
-          <span *ngIf="registerForm.get('last_name')?.errors?.['minlength']">Last name must be at least 2 characters</span>
-        </div>
-      </div>
+<div class="min-h-screen flex items-center justify-center bg-background p-4">
+  <div class="w-full max-w-lg">
+    <div class="bg-white rounded-custom shadow-custom p-8 border border-gray-100 transform transition-all duration-300 hover:shadow-xl hover:border-primary/20">
+      <!-- Decorative accent -->
+      <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-primary/10 to-transparent rounded-bl-[80px] pointer-events-none"></div>
       
-      <div class="form-group">
-        <label for="photo">Profile Photo (URL)</label>
-        <input 
-          type="text" 
-          id="photo" 
-          formControlName="photo" 
-          placeholder="Enter photo URL (optional)"
-        >
-      </div>
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6 relative z-10">Register</h2>
+      
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-5 relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <!-- First Name -->
+          <div class="space-y-2">
+            <label for="first_name" class="text-sm font-medium text-gray-700 block">First Name</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <input 
+                type="text" 
+                id="first_name" 
+                formControlName="first_name" 
+                placeholder="Enter your first name"
+                class="w-full py-2 pl-10 pr-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                [ngClass]="{'border-red-300 focus:border-red-500 focus:ring-red-500/20': registerForm.get('first_name')?.invalid && registerForm.get('first_name')?.touched}"
+              >
+            </div>
+            <div class="text-red-500 text-sm mt-1" *ngIf="registerForm.get('first_name')?.invalid && registerForm.get('first_name')?.touched">
+              <span *ngIf="registerForm.get('first_name')?.errors?.['required']">First name is required</span>
+              <span *ngIf="registerForm.get('first_name')?.errors?.['minlength']">First name must be at least 2 characters</span>
+            </div>
+          </div>
 
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input 
-          type="email" 
-          id="email" 
-          formControlName="email" 
-          placeholder="Enter your email"
-          [ngClass]="{'invalid': registerForm.get('email')?.invalid && registerForm.get('email')?.touched}"
-        >
-        <div class="error-message" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
-          <span *ngIf="registerForm.get('email')?.errors?.['required']">Email is required</span>
-          <span *ngIf="registerForm.get('email')?.errors?.['email']">Please enter a valid email</span>
+          <!-- Last Name -->
+          <div class="space-y-2">
+            <label for="last_name" class="text-sm font-medium text-gray-700 block">Last Name</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <input 
+                type="text" 
+                id="last_name" 
+                formControlName="last_name" 
+                placeholder="Enter your last name"
+                class="w-full py-2 pl-10 pr-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                [ngClass]="{'border-red-300 focus:border-red-500 focus:ring-red-500/20': registerForm.get('last_name')?.invalid && registerForm.get('last_name')?.touched}"
+              >
+            </div>
+            <div class="text-red-500 text-sm mt-1" *ngIf="registerForm.get('last_name')?.invalid && registerForm.get('last_name')?.touched">
+              <span *ngIf="registerForm.get('last_name')?.errors?.['required']">Last name is required</span>
+              <span *ngIf="registerForm.get('last_name')?.errors?.['minlength']">Last name must be at least 2 characters</span>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input 
-          type="password" 
-          id="password" 
-          formControlName="password" 
-          placeholder="Enter your password"
-          [ngClass]="{'invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched}"
-        >
-        <div class="error-message" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
-          <span *ngIf="registerForm.get('password')?.errors?.['required']">Password is required</span>
-          <span *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters</span>
+        
+        <!-- Profile Photo -->
+        <div class="space-y-2">
+          <label for="photo" class="text-sm font-medium text-gray-700 block">Profile Photo (URL)</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <input 
+              type="text" 
+              id="photo" 
+              formControlName="photo" 
+              placeholder="Enter photo URL (optional)"
+              class="w-full py-2 pl-10 pr-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+            >
+          </div>
         </div>
-      </div>
 
-      <div class="form-group">
-        <label for="confirmPassword">Confirm Password</label>
-        <input 
-          type="password" 
-          id="confirmPassword" 
-          formControlName="confirmPassword" 
-          placeholder="Confirm your password"
-          [ngClass]="{'invalid': registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched}"
-        >
-        <div class="error-message" *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched">
-          <span *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">Please confirm your password</span>
-          <span *ngIf="registerForm.get('confirmPassword')?.errors?.['passwordMismatch']">Passwords do not match</span>
+        <!-- Email -->
+        <div class="space-y-2">
+          <label for="email" class="text-sm font-medium text-gray-700 block">Email</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+              </svg>
+            </div>
+            <input 
+              type="email" 
+              id="email" 
+              formControlName="email" 
+              placeholder="Enter your email"
+              class="w-full py-2 pl-10 pr-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+              [ngClass]="{'border-red-300 focus:border-red-500 focus:ring-red-500/20': registerForm.get('email')?.invalid && registerForm.get('email')?.touched}"
+            >
+          </div>
+          <div class="text-red-500 text-sm mt-1" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+            <span *ngIf="registerForm.get('email')?.errors?.['required']">Email is required</span>
+            <span *ngIf="registerForm.get('email')?.errors?.['email']">Please enter a valid email</span>
+          </div>
         </div>
-      </div>
 
-      <div class="error-message" *ngIf="errorMessage">
-        {{ errorMessage }}
-      </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <!-- Password -->
+          <div class="space-y-2">
+            <label for="password" class="text-sm font-medium text-gray-700 block">Password</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <input 
+                type="password" 
+                id="password" 
+                formControlName="password" 
+                placeholder="Enter your password"
+                class="w-full py-2 pl-10 pr-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                [ngClass]="{'border-red-300 focus:border-red-500 focus:ring-red-500/20': registerForm.get('password')?.invalid && registerForm.get('password')?.touched}"
+              >
+            </div>
+            <div class="text-red-500 text-sm mt-1" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+              <span *ngIf="registerForm.get('password')?.errors?.['required']">Password is required</span>
+              <span *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters</span>
+            </div>
+          </div>
+        
+          <!-- Confirm Password -->
+          <div class="space-y-2">
+            <label for="confirmPassword" class="text-sm font-medium text-gray-700 block">Confirm Password</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <input 
+                type="password" 
+                id="confirmPassword" 
+                formControlName="confirmPassword" 
+                placeholder="Confirm your password"
+                class="w-full py-2 pl-10 pr-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                [ngClass]="{'border-red-300 focus:border-red-500 focus:ring-red-500/20': registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched}"
+              >
+            </div>
+            <div class="text-red-500 text-sm mt-1" *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched">
+              <span *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">Please confirm your password</span>
+              <span *ngIf="registerForm.get('confirmPassword')?.errors?.['passwordMismatch']">Passwords do not match</span>
+            </div>
+          </div>
+        </div>
 
-      <button type="submit" class="btn-primary" [disabled]="registerForm.invalid || isSubmitting">
-        {{ isSubmitting ? 'Registering...' : 'Register' }}
-      </button>
+        <div class="text-red-500 text-sm p-3 bg-red-50 rounded-lg border border-red-100" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
 
-      <div class="auth-footer">
-        <p>Already have an account? <a routerLink="/login">Login</a></p>
-      </div>
-    </form>
+        <button 
+          type="submit" 
+          class="w-full bg-primary text-white rounded-custom py-2 px-4 flex items-center justify-center gap-2 hover:bg-primary/90 transition-all shadow-custom transform hover:scale-105 duration-200 disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
+          [disabled]="registerForm.invalid || isSubmitting"
+        >
+          <svg *ngIf="isSubmitting" class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          {{ isSubmitting ? 'Registering...' : 'Register' }}
+        </button>
+
+        <div class="text-center text-sm text-gray-600 mt-4">
+          <p>Already have an account? <a routerLink="/login" class="text-primary hover:text-primary/80 font-medium">Login</a></p>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
