@@ -134,10 +134,8 @@ export class ContactsListComponent implements OnInit, OnDestroy {
     return this.filteredContacts.slice(start, end);
   }
 
-  // Setter for the contacts (needed for compatibility with existing code)
-  set contacts(value: Contact[]) {
-    // This setter is intentionally minimal as we're using a getter
-  }
+  // Setter for the contacts
+  set contacts(value: Contact[]) {}
 
   // Display page for UI (1-indexed)
   getDisplayPage(): number {

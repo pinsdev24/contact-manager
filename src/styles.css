@@ -1,4 +1,5 @@
 /* Global styles for the contact manager app */
 @import 'tailwindcss';
 
+/* Custom Tailwind CSS configuration */
 @config "../tailwind.config.js";
