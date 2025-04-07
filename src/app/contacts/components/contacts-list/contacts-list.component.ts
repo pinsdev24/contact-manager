@@ -17,7 +17,8 @@ import { debounceTime, takeUntil } from 'rxjs/operators';
   imports: [CommonModule, RouterModule, FormsModule, ContactModalComponent, DeleteConfirmationModalComponent]
 })
 export class ContactsListComponent implements OnInit, OnDestroy {
-  contacts: Contact[] = [];
+  allContacts: Contact[] = []; // Store all fetched contacts
+  filteredContacts: Contact[] = []; // Contacts after filtering
   currentPage = 0;
   pageSize = 10;
   totalContacts = 0;
@@ -53,10 +54,10 @@ export class ContactsListComponent implements OnInit, OnDestroy {
     
     // Setup search debounce
     this.searchSubject.pipe(
-      debounceTime(300), // Wait 300ms after the last input event
+      debounceTime(300),
       takeUntil(this.destroy$)
     ).subscribe(() => {
-      this.onSearch();
+      this.filterContacts();
     });
   }
 
@@ -69,12 +70,12 @@ export class ContactsListComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.errorMessage = '';
 
-    this.contactsService.getContacts(this.currentPage, this.searchTerm).subscribe({
+    this.contactsService.getContacts(this.currentPage, '').subscribe({
       next: (response) => {
-        this.contacts = response.data;
-        this.totalContacts = response.pagination.total;
-        this.pageSize = response.pagination.pageSize;
+        this.allContacts = response.data;
+        this.filterContacts(); // Apply any existing filter
         this.isLoading = false;
+        this.totalContacts = response.pagination.total;
       },
       error: (error) => {
         this.errorMessage = error.message || 'Failed to load contacts';
@@ -83,20 +84,59 @@ export class ContactsListComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSearchInput(): void {
-    this.searchSubject.next(this.searchTerm);
+  filterContacts(): void {
+    if (!this.searchTerm.trim()) {
+      // If no search term, show all contacts
+      this.filteredContacts = [...this.allContacts];
+    } else {
+      const searchLower = this.searchTerm.toLowerCase();
+      
+      // Filter contacts based on search term
+      this.filteredContacts = this.allContacts.filter(contact => 
+        contact.first_name?.toLowerCase().includes(searchLower) ||
+        contact.last_name?.toLowerCase().includes(searchLower) ||
+        contact.email?.toLowerCase().includes(searchLower) ||
+        contact.phone?.toLowerCase().includes(searchLower)
+      );
+    }
+    
+    // Update pagination values
+    this.totalContacts = this.filteredContacts.length;
+    
+    // Reset to first page when filter changes
+    this.currentPage = 0;
+    
+    // Get the current page of contacts to display
+    this.updateDisplayedContacts();
   }
 
-  onSearch(): void {
-    this.currentPage = 0; // Reset to first page (zero-indexed) when searching
-    this.loadContacts();
+  updateDisplayedContacts(): void {
+    const start = this.currentPage * this.pageSize;
+    const end = start + this.pageSize;
+    
+    // Set contacts to the current page of filtered contacts
+    this.contacts = this.filteredContacts.slice(start, end);
+  }
+
+  onSearchInput(): void {
+    this.searchSubject.next(this.searchTerm);
   }
 
   onPageChange(page: number): void {
     // Convert from 1-indexed UI page to 0-indexed API page
     this.currentPage = page - 1;
-    this.loadContacts();
+    this.updateDisplayedContacts();
   }
+
+  // Getter for the paginated contacts
+  get contacts(): Contact[] {
+    const start = this.currentPage * this.pageSize;
+    const end = start + this.pageSize;
+    return this.filteredContacts.slice(start, end);
+  }
+
+  // Setter for the contacts
+  set contacts(value: Contact[]) {}
 
   // Display page for UI (1-indexed)
   getDisplayPage(): number {
@@ -109,7 +149,7 @@ export class ContactsListComponent implements OnInit, OnDestroy {
 
   getPageNumbers(): number[] {
     const totalPages = this.getTotalPages();
-    const displayPage = this.getDisplayPage(); // Use 1-indexed page for UI
+    const displayPage = this.getDisplayPage();
     
     // If we have 7 or fewer pages, show all pages
     if (totalPages <= 7) {
@@ -159,7 +199,10 @@ export class ContactsListComponent implements OnInit, OnDestroy {
     const id = this.contactToDelete.id;
     this.contactsService.deleteContact(id).subscribe({
       next: () => {
-        this.loadContacts(); // Reload the list after deletion
+        // Update local lists after deletion
+        this.allContacts = this.allContacts.filter(c => c.id !== id);
+        this.filterContacts(); // Re-apply filters and update the view
+        this.closeDeleteModal();
       },
       error: (error) => {
         this.errorMessage = error.message || 'Failed to delete contact';
@@ -185,7 +228,7 @@ export class ContactsListComponent implements OnInit, OnDestroy {
   }
 
   onContactSaved(): void {
-    this.loadContacts();
+    this.loadContacts(); // Reload all contacts after a contact is saved
   }
 
   viewContactDetails(id?: number): void {
@@ -196,7 +239,7 @@ export class ContactsListComponent implements OnInit, OnDestroy {
 
   clearSearch(): void {
     this.searchTerm = '';
-    this.loadContacts();
+    this.filterContacts(); // Reset filter with empty search term
   }
 
   toggleDropdown(contactId: number | undefined, event: Event): void {

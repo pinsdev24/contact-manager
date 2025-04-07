@@ -31,8 +31,6 @@ export class ContactsService {
       params = params.append('search', search);
     }
 
-    console.log('Params:', params.keys());
-
     return this.http.get<ContactsResponse>(`${this.API_URL}/contacts`, { params })
       .pipe(
         catchError(error => this.handleError(error))
