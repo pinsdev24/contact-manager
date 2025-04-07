@@ -75,6 +75,7 @@ export class ContactsListComponent implements OnInit, OnDestroy {
         this.allContacts = response.data;
         this.filterContacts(); // Apply any existing filter
         this.isLoading = false;
+        this.totalContacts = response.pagination.total;
       },
       error: (error) => {
         this.errorMessage = error.message || 'Failed to load contacts';
