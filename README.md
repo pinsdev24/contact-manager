@@ -1,49 +1,57 @@
-# Contact Manager App
+# Application de Gestion de Contacts
 
-Contact Manager App is a powerful tool designed to help you manage your contacts efficiently. With features like adding, editing, and deleting contacts, this app provides a seamless experience for organizing your personal or professional network.
+L'Application de Gestion de Contacts est conçu pour vous aider à gérer vos contacts efficacement. Avec des fonctionnalités comme l'ajout, la modification et la suppression de contacts, cette application offre une expérience fluide pour organiser votre réseau personnel ou professionnel.
 
-## Live Demo
-The application is deployed and available at [https://contact-manager-lemon.vercel.app/](https://contact-manager-lemon.vercel.app/)
+## Langue
+J'ai fait l'application est en anglais car je vais le mettre sur mon portfolio.
 
-## Table of Contents
-- [Features](#features)
-- [Screenshots](#screenshots)
-- [Project Structure](#project-structure)
-- [UI Guidelines](#ui-guidelines)
+## Démo en Ligne
+L'application est déployée et disponible sur [https://contact-manager-lemon.vercel.app/](https://contact-manager-lemon.vercel.app/)
+
+## Table des Matières
+- [Fonctionnalités](#fonctionnalités)
+- [Captures d'écran](#captures-décran)
+- [Structure du Projet](#structure-du-projet)
+- [Directives UI](#directives-ui)
 - [Installation](#installation)
-- [Usage](#usage)
-- [Known Issues](#known-issues)
+- [Utilisation](#utilisation)
+- [Problèmes Connus](#problèmes-connus)
 
-## Features
-- Modern UI with Tailwind CSS styling
-- User authentication (login/register)
-- Add new contacts with details like name, email, phone, and photo
-- Edit existing contacts to update their information
-- Delete contacts with a confirmation modal to prevent accidental deletions
-- View contact details with a user-friendly interface
-- Pagination for better navigation through contacts
+## Fonctionnalités
+- Interface moderne avec style Tailwind CSS
+- Authentification utilisateur (connexion/inscription)
+- Ajout de nouveaux contacts avec des détails comme nom, email, téléphone et photo
+- Modification des contacts existants pour mettre à jour leurs informations
+- Suppression de contacts avec une fenêtre de confirmation pour éviter les suppressions accidentelles
+- Consultation des détails des contacts avec une interface conviviale
+- Pagination pour une meilleure navigation à travers les contacts
 
-## Screenshots
+## Captures d'écran
 
-### Authentication
-| Login | Registration |
-|-------|-------------|
-| ![Login Screen](/public/screenshoots/login.png) | ![Registration Screen](/public/screenshoots/register.png) |
+### Authentification
+| Connexion | Inscription |
+|-----------|-------------|
+| ![Écran de connexion](/public/screenshoots/login.png) | ![Écran d'inscription](/public/screenshoots/register.png) |
 
-### Contacts Management
-| All Contacts | Create Contact |
-|--------------|----------------|
-| ![All Contacts](/public/screenshoots/all_contacts.png) | ![Create Contact](/public/screenshoots/create_contact.png) |
+### Gestion des Contacts
+| Tous les Contacts | Créer un Contact |
+|-------------------|------------------|
+| ![Tous les contacts](/public/screenshoots/all_contacts.png) | ![Créer un contact](/public/screenshoots/create_contact.png) |
 
-| Contact Details | Edit Contact |
-|-----------------|--------------|
-| ![Contact Details](/public/screenshoots/contact_details.png) | ![Edit Contact](/public/screenshoots/edit_contact.png) |
+| Détails du Contact | Modifier un Contact |
+|--------------------|---------------------|
+| ![Détails du contact](/public/screenshoots/contact_details.png) | ![Modifier un contact](/public/screenshoots/edit_contact.png) |
 
-| Delete Contact | Pagination |
-|----------------|------------|
-| ![Delete Contact](/public/screenshoots/delete_contact.png) | ![Pagination](/public/screenshoots/pagination.png) |
+| Supprimer un Contact | Pagination |
+|----------------------|------------|
+| ![Supprimer un contact](/public/screenshoots/delete_contact.png) | ![Pagination](/public/screenshoots/pagination.png) |
 
-## Project Structure
+### Recherche de Contacts
+| Recherche sans Résultat |
+|--------------------------|
+| ![Recherche sans résultat](/public/screenshoots/not_contact_searched_found.png) |
+
+## Structure du Projet
 ```
 src/
 ├── app/
@@ -65,17 +73,17 @@ src/
 └── main.ts
 ```
 
-## UI Guidelines
-The application uses a consistent design language with:
-- Custom color palette (primary: #6c63ff, secondary: #ff6584)
-- Custom border radius (20px)
-- Custom shadow effects
-- Responsive design for mobile and desktop views
+## Directives UI
+L'application utilise un langage de design cohérent avec :
+- Une palette de couleurs personnalisée (primaire : #6c63ff, secondaire : #ff6584)
+- Un rayon de bordure personnalisé (20px)
+- Des effets d'ombre personnalisés
+- Un design responsive pour les vues mobiles et bureau
 
-### Tailwind CSS Setup
-The application uses Tailwind CSS for styling with custom configuration:
+### Configuration de Tailwind CSS
+L'application utilise Tailwind CSS pour le style avec une configuration personnalisée :
 
-1. Configuration file (`tailwind.config.js`):
+1. Fichier de configuration (`tailwind.config.js`) :
 ```js
 module.exports = {
   content: [
@@ -101,52 +109,54 @@ module.exports = {
 }
 ```
 
-2. Global styles (`styles.css`):
+2. Styles globaux (`styles.css`) :
 ```css
 @import 'tailwindcss';
 @config "../tailwind.config.js";
 ```
 
 ## Installation
-To install and run the app locally, follow these steps:
+Pour installer et exécuter l'application localement, suivez ces étapes :
 
-1. Clone the repository:
+1. Clonez le dépôt :
    ```bash
    git clone https://github.com/pinsdev24/contact-manager.git
    ```
+  ou juste unzip le dossier zipper du projet.
 
-2. Navigate to the project directory:
+2. Naviguez vers le répertoire du projet :
    ```bash
-   cd contact-manager
+   cd contact-manager (github) ou contact-manager-app (fichier unzip)
    ```
 
-3. Install the dependencies:
+3. Installez les dépendances :
    ```bash
    npm install
    ```
 
-4. Start the development server:
+4. Démarrez le serveur de développement :
    ```bash
    ng serve
    ```
 
-5. Open your browser and go to `http://localhost:4200/` to view the app.
+5. Ouvrez votre navigateur et allez sur `http://localhost:4200/` pour voir l'application.
 
-## Usage
-- Register a new account or login with existing credentials
-- Navigate to the Contacts page to view all contacts
-- Use the search functionality to find specific contacts
-- Click on a contact to view detailed information
-- Use the Edit button to modify contact details
-- Click the Delete button to remove a contact, with a confirmation prompt
+## Utilisation
+- Inscrivez-vous ou connectez-vous avec des identifiants existants
+- Naviguez vers la page Contacts pour voir tous vos contacts
+- Utilisez la fonctionnalité de recherche pour trouver des contacts spécifiques
+- Cliquez sur un contact pour voir ses informations détaillées
+- Utilisez le bouton Modifier pour mettre à jour les détails d'un contact
+- Cliquez sur le bouton Supprimer pour retirer un contact, avec une invite de confirmation
 
-## Known Issues
-- **API Limitations**: The current API implementation has some issues:
-  - Pagination functionality is not working as expected event by having more than 10 contacts I have created.
-  - Search functionality has limitations and may not return accurate results
-  - The overall swagger api is not well documented
+## Problèmes Connus
+- **Limitations de l'API** : L'implémentation actuelle de l'API présente quelques problèmes :
+  - La fonctionnalité de pagination ne fonctionne pas comme prévu même en ayant plus de 10 contacts que j'ai créés.
+  - La fonctionnalité de recherche a des limitations et peut ne pas renvoyer des résultats précis
+  - L'API swagger dans son ensemble n'est pas bien documentée et comporte des erreurs. (dans la reponse de /auth/login par exemple on a "message": "..." et l'objet user or dans la documentation c'est 'token' et user). Aussi le body pour creer un user n'indique pas qu'il faut le first_name et last_name
+  - Les erreurs ne sont pas explicites.
 
-### API Issues Screenshots
-| API Issue 1 | API Issue 2 |
-|-------------|-------------|
-| ![API Issue 1](/public/screenshoots/api_issue1.png) | ![API Issue 2](/public/screenshoots/api_issue2.png) |
+### Captures d'écran des Problèmes d'API
+| Problème d'API 1 | Problème d'API 2 |
+|------------------|------------------|
+| ![Problème d'API 1](/public/screenshoots/api_issue1.png) | ![Problème d'API 2](/public/screenshoots/api_issue2.png) |
