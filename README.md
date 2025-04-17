@@ -1,8 +1,8 @@
-# Contact Manager App
+# Contact Manager Application
 
-Contact Manager App is a powerful tool designed to help you manage your contacts efficiently. With features like adding, editing, and deleting contacts, this app provides a seamless experience for organizing your personal or professional network.
+The Contact Manager Application is designed to help you manage your contacts efficiently. With features like adding, modifying, and deleting contacts, this application offers a smooth experience for organizing your personal or professional network.
 
-## Live Demo
+## Online Demo
 The application is deployed and available at [https://contact-manager-lemon.vercel.app/](https://contact-manager-lemon.vercel.app/)
 
 ## Table of Contents
@@ -15,33 +15,38 @@ The application is deployed and available at [https://contact-manager-lemon.verc
 - [Known Issues](#known-issues)
 
 ## Features
-- Modern UI with Tailwind CSS styling
-- User authentication (login/register)
+- Modern interface with Tailwind CSS styling
+- User authentication (login/registration)
 - Add new contacts with details like name, email, phone, and photo
 - Edit existing contacts to update their information
-- Delete contacts with a confirmation modal to prevent accidental deletions
+- Delete contacts with a confirmation window to prevent accidental deletions
 - View contact details with a user-friendly interface
 - Pagination for better navigation through contacts
 
 ## Screenshots
 
 ### Authentication
-| Login | Registration |
-|-------|-------------|
+| Login | Register |
+|-----------|-------------|
 | ![Login Screen](/public/screenshoots/login.png) | ![Registration Screen](/public/screenshoots/register.png) |
 
-### Contacts Management
+### Contact Management
 | All Contacts | Create Contact |
-|--------------|----------------|
+|-------------------|------------------|
 | ![All Contacts](/public/screenshoots/all_contacts.png) | ![Create Contact](/public/screenshoots/create_contact.png) |
 
 | Contact Details | Edit Contact |
-|-----------------|--------------|
+|--------------------|---------------------|
 | ![Contact Details](/public/screenshoots/contact_details.png) | ![Edit Contact](/public/screenshoots/edit_contact.png) |
 
 | Delete Contact | Pagination |
-|----------------|------------|
+|----------------------|------------|
 | ![Delete Contact](/public/screenshoots/delete_contact.png) | ![Pagination](/public/screenshoots/pagination.png) |
+
+### Contact Search
+| Search with No Results |
+|--------------------------|
+| ![Search with No Results](/public/screenshoots/not_contact_searched_found.png) |
 
 ## Project Structure
 ```
@@ -72,8 +77,8 @@ The application uses a consistent design language with:
 - Custom shadow effects
 - Responsive design for mobile and desktop views
 
-### Tailwind CSS Setup
-The application uses Tailwind CSS for styling with custom configuration:
+### Tailwind CSS Configuration
+The application uses Tailwind CSS for styling with a custom configuration:
 
 1. Configuration file (`tailwind.config.js`):
 ```js
@@ -108,19 +113,20 @@ module.exports = {
 ```
 
 ## Installation
-To install and run the app locally, follow these steps:
+To install and run the application locally, follow these steps:
 
 1. Clone the repository:
    ```bash
    git clone https://github.com/pinsdev24/contact-manager.git
    ```
+   or just unzip the project folder.
 
 2. Navigate to the project directory:
    ```bash
-   cd contact-manager
+   cd contact-manager (github) or contact-manager-app (unzipped file)
    ```
 
-3. Install the dependencies:
+3. Install dependencies:
    ```bash
    npm install
    ```
@@ -130,23 +136,12 @@ To install and run the app locally, follow these steps:
    ng serve
    ```
 
-5. Open your browser and go to `http://localhost:4200/` to view the app.
+5. Open your browser and go to `http://localhost:4200/` to view the application.
 
 ## Usage
-- Register a new account or login with existing credentials
-- Navigate to the Contacts page to view all contacts
-- Use the search functionality to find specific contacts
-- Click on a contact to view detailed information
-- Use the Edit button to modify contact details
+- Sign up or log in with existing credentials
+- Navigate to the Contacts page to see all your contacts
+- Use the search feature to find specific contacts
+- Click on a contact to view their detailed information
+- Use the Edit button to update contact details
 - Click the Delete button to remove a contact, with a confirmation prompt
-
-## Known Issues
-- **API Limitations**: The current API implementation has some issues:
-  - Pagination functionality is not working as expected event by having more than 10 contacts I have created.
-  - Search functionality has limitations and may not return accurate results
-  - The overall swagger api is not well documented
-
-### API Issues Screenshots
-| API Issue 1 | API Issue 2 |
-|-------------|-------------|
-| ![API Issue 1](/public/screenshoots/api_issue1.png) | ![API Issue 2](/public/screenshoots/api_issue2.png) |
