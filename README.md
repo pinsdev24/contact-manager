@@ -1,57 +1,54 @@
-# Application de Gestion de Contacts
+# Contact Manager Application
 
-L'Application de Gestion de Contacts est conçu pour vous aider à gérer vos contacts efficacement. Avec des fonctionnalités comme l'ajout, la modification et la suppression de contacts, cette application offre une expérience fluide pour organiser votre réseau personnel ou professionnel.
+The Contact Manager Application is designed to help you manage your contacts efficiently. With features like adding, modifying, and deleting contacts, this application offers a smooth experience for organizing your personal or professional network.
 
-## Langue
-J'ai fait l'application est en anglais car je vais le mettre sur mon portfolio.
+## Online Demo
+The application is deployed and available at [https://contact-manager-lemon.vercel.app/](https://contact-manager-lemon.vercel.app/)
 
-## Démo en Ligne
-L'application est déployée et disponible sur [https://contact-manager-lemon.vercel.app/](https://contact-manager-lemon.vercel.app/)
-
-## Table des Matières
-- [Fonctionnalités](#fonctionnalités)
-- [Captures d'écran](#captures-décran)
-- [Structure du Projet](#structure-du-projet)
-- [Directives UI](#directives-ui)
+## Table of Contents
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Project Structure](#project-structure)
+- [UI Guidelines](#ui-guidelines)
 - [Installation](#installation)
-- [Utilisation](#utilisation)
-- [Problèmes Connus](#problèmes-connus)
+- [Usage](#usage)
+- [Known Issues](#known-issues)
 
-## Fonctionnalités
-- Interface moderne avec style Tailwind CSS
-- Authentification utilisateur (connexion/inscription)
-- Ajout de nouveaux contacts avec des détails comme nom, email, téléphone et photo
-- Modification des contacts existants pour mettre à jour leurs informations
-- Suppression de contacts avec une fenêtre de confirmation pour éviter les suppressions accidentelles
-- Consultation des détails des contacts avec une interface conviviale
-- Pagination pour une meilleure navigation à travers les contacts
+## Features
+- Modern interface with Tailwind CSS styling
+- User authentication (login/registration)
+- Add new contacts with details like name, email, phone, and photo
+- Edit existing contacts to update their information
+- Delete contacts with a confirmation window to prevent accidental deletions
+- View contact details with a user-friendly interface
+- Pagination for better navigation through contacts
 
-## Captures d'écran
+## Screenshots
 
-### Authentification
-| Connexion | Inscription |
+### Authentication
+| Login | Register |
 |-----------|-------------|
-| ![Écran de connexion](/public/screenshoots/login.png) | ![Écran d'inscription](/public/screenshoots/register.png) |
+| ![Login Screen](/public/screenshoots/login.png) | ![Registration Screen](/public/screenshoots/register.png) |
 
-### Gestion des Contacts
-| Tous les Contacts | Créer un Contact |
+### Contact Management
+| All Contacts | Create Contact |
 |-------------------|------------------|
-| ![Tous les contacts](/public/screenshoots/all_contacts.png) | ![Créer un contact](/public/screenshoots/create_contact.png) |
+| ![All Contacts](/public/screenshoots/all_contacts.png) | ![Create Contact](/public/screenshoots/create_contact.png) |
 
-| Détails du Contact | Modifier un Contact |
+| Contact Details | Edit Contact |
 |--------------------|---------------------|
-| ![Détails du contact](/public/screenshoots/contact_details.png) | ![Modifier un contact](/public/screenshoots/edit_contact.png) |
+| ![Contact Details](/public/screenshoots/contact_details.png) | ![Edit Contact](/public/screenshoots/edit_contact.png) |
 
-| Supprimer un Contact | Pagination |
+| Delete Contact | Pagination |
 |----------------------|------------|
-| ![Supprimer un contact](/public/screenshoots/delete_contact.png) | ![Pagination](/public/screenshoots/pagination.png) |
+| ![Delete Contact](/public/screenshoots/delete_contact.png) | ![Pagination](/public/screenshoots/pagination.png) |
 
-### Recherche de Contacts
-| Recherche sans Résultat |
+### Contact Search
+| Search with No Results |
 |--------------------------|
-| ![Recherche sans résultat](/public/screenshoots/not_contact_searched_found.png) |
+| ![Search with No Results](/public/screenshoots/not_contact_searched_found.png) |
 
-## Structure du Projet
+## Project Structure
 ```
 src/
 ├── app/
@@ -73,17 +70,17 @@ src/
 └── main.ts
 ```
 
-## Directives UI
-L'application utilise un langage de design cohérent avec :
-- Une palette de couleurs personnalisée (primaire : #6c63ff, secondaire : #ff6584)
-- Un rayon de bordure personnalisé (20px)
-- Des effets d'ombre personnalisés
-- Un design responsive pour les vues mobiles et bureau
+## UI Guidelines
+The application uses a consistent design language with:
+- Custom color palette (primary: #6c63ff, secondary: #ff6584)
+- Custom border radius (20px)
+- Custom shadow effects
+- Responsive design for mobile and desktop views
 
-### Configuration de Tailwind CSS
-L'application utilise Tailwind CSS pour le style avec une configuration personnalisée :
+### Tailwind CSS Configuration
+The application uses Tailwind CSS for styling with a custom configuration:
 
-1. Fichier de configuration (`tailwind.config.js`) :
+1. Configuration file (`tailwind.config.js`):
 ```js
 module.exports = {
   content: [
@@ -109,54 +106,42 @@ module.exports = {
 }
 ```
 
-2. Styles globaux (`styles.css`) :
+2. Global styles (`styles.css`):
 ```css
 @import 'tailwindcss';
 @config "../tailwind.config.js";
 ```
 
 ## Installation
-Pour installer et exécuter l'application localement, suivez ces étapes :
+To install and run the application locally, follow these steps:
 
-1. Clonez le dépôt :
+1. Clone the repository:
    ```bash
    git clone https://github.com/pinsdev24/contact-manager.git
    ```
-  ou juste unzip le dossier zipper du projet.
+   or just unzip the project folder.
 
-2. Naviguez vers le répertoire du projet :
+2. Navigate to the project directory:
    ```bash
-   cd contact-manager (github) ou contact-manager-app (fichier unzip)
+   cd contact-manager (github) or contact-manager-app (unzipped file)
    ```
 
-3. Installez les dépendances :
+3. Install dependencies:
    ```bash
    npm install
    ```
 
-4. Démarrez le serveur de développement :
+4. Start the development server:
    ```bash
    ng serve
    ```
 
-5. Ouvrez votre navigateur et allez sur `http://localhost:4200/` pour voir l'application.
+5. Open your browser and go to `http://localhost:4200/` to view the application.
 
-## Utilisation
-- Inscrivez-vous ou connectez-vous avec des identifiants existants
-- Naviguez vers la page Contacts pour voir tous vos contacts
-- Utilisez la fonctionnalité de recherche pour trouver des contacts spécifiques
-- Cliquez sur un contact pour voir ses informations détaillées
-- Utilisez le bouton Modifier pour mettre à jour les détails d'un contact
-- Cliquez sur le bouton Supprimer pour retirer un contact, avec une invite de confirmation
-
-## Problèmes Connus
-- **Limitations de l'API** : L'implémentation actuelle de l'API présente quelques problèmes :
-  - La fonctionnalité de pagination ne fonctionne pas comme prévu même en ayant plus de 10 contacts que j'ai créés.
-  - La fonctionnalité de recherche a des limitations et peut ne pas renvoyer des résultats précis
-  - L'API swagger dans son ensemble n'est pas bien documentée et comporte des erreurs. (dans la reponse de /auth/login par exemple on a "message": "..." et l'objet user or dans la documentation c'est 'token' et user). Aussi le body pour creer un user n'indique pas qu'il faut le first_name et last_name
-  - Les erreurs ne sont pas explicites.
-
-### Captures d'écran des Problèmes d'API
-| Problème d'API 1 | Problème d'API 2 |
-|------------------|------------------|
-| ![Problème d'API 1](/public/screenshoots/api_issue1.png) | ![Problème d'API 2](/public/screenshoots/api_issue2.png) |
+## Usage
+- Sign up or log in with existing credentials
+- Navigate to the Contacts page to see all your contacts
+- Use the search feature to find specific contacts
+- Click on a contact to view their detailed information
+- Use the Edit button to update contact details
+- Click the Delete button to remove a contact, with a confirmation prompt
